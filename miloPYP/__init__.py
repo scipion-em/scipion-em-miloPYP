@@ -27,24 +27,24 @@
 import os
 import pyworkflow.utils as pwutils
 import pwem
+from pyworkflow import TOMO
 
-from myplugin.constants import *
+from miloPYP.constants import *
 
-__version__ = "0.1"  # plugin version
+__version__ = '3.0.0'
 _logo = "icon.png"
-_references = ['you2019']
+_references = ['Huang2024']
 
 
 class Plugin(pwem.Plugin):
-    _homeVar = MYPLUGIN_HOME
-    _pathVars = [MYPLUGIN_HOME]
-    _url = "https://github.com/scipion-em/scipion-em-template"
-    _supportedVersions = [V1]  # binary version
+    _supportedVersions = [V3_2_8]
+    _url = "https://github.com/scipion-em/scipion-em-miloPYP"
+    _processingField = [TOMO]
 
     @classmethod
     def _defineVariables(cls):
-        cls._defineVar(MYPLUGIN_BINARY, "program")
-        cls._defineEmVar(MYPLUGIN_HOME, f"myplugin-{V1}")
+        cls._defineVar(MILOPYP_ENV_ACTIVATION, MILOPYP_DEFAULT_ENV_ACTIVATION)
+        cls._defineEmVar(MILOPYP_HOME, MILOPYP + '-' + MILOPYP_DEFAULT_VERSION)
 
     @classmethod
     def getEnviron(cls):
@@ -58,15 +58,35 @@ class Plugin(pwem.Plugin):
     @classmethod
     def getDependencies(cls):
         """ Return a list of dependencies. """
+        # try to get CONDA activation command
+        condaActivationCmd = cls.getCondaActivationCmd()
         neededProgs = []
-
+        if not condaActivationCmd:
+            neededProgs.append('conda')
         return neededProgs
 
     @classmethod
     def defineBinaries(cls, env):
-        installCmds = [("make -j 4", "")]  # replace the target "" with e.g. "bin/myprogram"
-        env.addPackage('myplugin', version=V1,
+        MILOPYP_INSTALLED =f'{MILOPYP_ENV_NAME}_{MILOPYP_DEFAULT_VERSION}_installed'
+        installationCmd = cls.getCondaActivationCmd()
+
+        # Create the environment
+        installationCmd += (f'conda create --name {MILOPYP_ENV_NAME} python={PYTHON_VERSION} &&')
+
+        # Activate the env
+        installationCmd += f'conda activate {MILOPYP_ENV_NAME} &&'
+
+        # Clone the cet-pick repo
+        installationCmd += 'git clone https://github.com/nextpyp/cet_pick.git &&'
+
+
+
+
+        # checkpoint
+        MILOPYP_commands = [(installationCmd,MILOPYP_INSTALLED)]
+
+        env.addPackage(MILOPYP, version=MILOPYP_DEFAULT_VERSION,
                        tar='void.tgz',
-                       commands=installCmds,
+                       commands=MILOPYP_commands,
                        neededProgs=cls.getDependencies(),
                        default=True)

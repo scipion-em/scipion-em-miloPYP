@@ -24,20 +24,19 @@
 # *  e-mail address 'scipion@cnb.csic.es'
 # *
 # **************************************************************************
-
 """
-@article{you2019,
-title = "Title of your paper ",
-journal = "...",
-volume = "...",
-number = ".",
-pages = "1 - 6",
-year = "2019",
-issn = "0000-1111",
-doi = "https://dx.doi.org/xxxxx/xxxxx",
-url = "https://www.url",
-author = "you and your team",
-keywords = "Single particle analysis Tomography",
+@article{Huang2024,
+  author    = {Huang, Qinwen and Zhou, Ye and Bartesaghi, Alberto},
+  title     = {MiLoPYP: self-supervised molecular pattern mining and particle localization in situ},
+  journal   = {Nature Methods},
+  year      = {2024},
+  month     = {oct},
+  volume    = {21},
+  number    = {10},
+  pages     = {1863--1872},
+  issn      = {1548-7105},
+  doi       = {10.1038/s41592-024-02403-6},
+  url       = {https://doi.org/10.1038/s41592-024-02403-6}
 }
 
 """

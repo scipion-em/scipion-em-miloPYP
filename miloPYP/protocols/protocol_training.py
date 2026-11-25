@@ -43,7 +43,7 @@ class outputs(Enum):
     count = Integer
 
 
-class MiloPYPPrefixHelloWorld(EMProtocol):
+class ProtMiloPYPTraining(EMProtocol):
     """
     This protocol will print hello world in the console
     IMPORTANT: Classes names should be unique, better prefix them

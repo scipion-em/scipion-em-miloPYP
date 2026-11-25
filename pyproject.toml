@@ -3,11 +3,11 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "scipion-em-template"
+name = "scipion-em-miloPYP"
 dynamic = ["version", "dependencies"]
-description = "Scipion plugin template"
+description = "Plugin to use MiLoPYP within the Scipion framework"
 authors = [
-    {name = "you", email = "you@yourinstitution.email"}
+    {name = "Scipion Team", email = "scipion@cnb.csic.es"}
 ]
 requires-python = ">=3.8"
 readme = "README.rst"
@@ -23,15 +23,15 @@ classifiers = [
 keywords = ["scipion", "cryoem", "imageprocessing", "scipion-3.0"]
 
 [project.urls]
-Homepage = "https://github.com/scipion-em/scipion-em-template"
-Issues = "https://github.com/scipion-em/scipion-em-template/issues"
+Homepage = "https://github.com/scipion-em/scipion-em-miloPYP"
+Issues = "https://github.com/scipion-em/scipion-em-miloPYP/issues"
 
 [tool.setuptools.dynamic]
-version = {attr = "template.__version__"}
+version = {attr = "miloPYP.__version__"}
 dependencies = {file = ["requirements.txt"]}
 
 [tool.setuptools.package-data]
-"template" = ["protocols.conf", "icon.png"]
+"miloPYP" = ["protocols.conf", "icon.png"]
 
 [project.entry-points."pyworkflow.plugin"]
-template = "template"
+miloPYP = "miloPYP"
